@@ -2,7 +2,7 @@ const {test, expect} = require('@playwright/test');
 
 
 //Test login & Grabbing the text validation
-test.only("Login Automation",async ({browser,page}) =>{
+test("Login Automation",async ({browser,page}) =>{
 
     // const context = await browser.newContext();
     // const page = await context.newPage();
