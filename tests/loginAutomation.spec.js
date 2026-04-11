@@ -2,18 +2,22 @@ const {test, expect} = require('@playwright/test');
 
 
 //Test login & Grabbing the text validation
-test.only("Login Automation",async ({browser}) =>{
+test.only("Login Automation",async ({browser,page}) =>{
 
-    const context = await browser.newContext();
-    const page = await context.newPage();
+    // const context = await browser.newContext();
+    // const page = await context.newPage();
     await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
     const username = page.locator("#userEmail");
     const password = page.locator("#userPassword");
     const signInButton = page.locator('#login');
+    const signInError = page.locator('.toast-message');
     const textTitles = page.locator(".card-body b");
 
-    await username.fill('april1@gmail.com');
+    await username.fill('sabxsax@gmail.com');
     await password.fill('VisTech@0426');
+    await signInButton.click();
+    expect(await signInError.textContent()).toContain('Incorrect email');
+    await username.fill('april1@gmail.com');
     await signInButton.click();
     // await page.waitForLoadState('networkidle');                              // Wait for load state
     // await expect(textTitles.first()).toBeVisible();
