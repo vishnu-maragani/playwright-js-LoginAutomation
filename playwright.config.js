@@ -1,4 +1,5 @@
 import {defineConfig,devices, expect} from '@playwright/test';
+import { trace } from 'node:console';
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -13,7 +14,8 @@ const config = {
     reporter:'html',
     use:{
         browserName: 'chromium',
-        headless: true
+        headless: true,
+        trace:'on'
     }
 
 };
