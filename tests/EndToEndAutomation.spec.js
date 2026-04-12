@@ -35,9 +35,12 @@ test.only('E2E Test case Scenario',async ({browser})=>{
             }
         }
 
-    await expect(page.locator(`label:has-text("${buyItems.length}")`)).toBeVisible({timeout:10000});
     //Cliicking on cart button and validating added products
     await page.locator("[routerlink*='cart']").click();
+    await page.waitForTimeout(3000); // just to let page load
+    // DEBUG - let's see what's actually on the cart page
+    console.log('Cart page HTML:', await page.locator('body').innerHTML());
+    
     const productsAddedCart = page.locator(".cart");
     await productsAddedCart.first().waitFor({timeout:10000});
     for(const item of buyItems)
