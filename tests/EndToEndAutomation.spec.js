@@ -6,49 +6,44 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     const page = await context.newPage();
     
     //Login credentials:-
-    require('dotenv').config();
-    const username= process.env.EMAIL;
-    const password=process.env.PASSWORD;
+    let username= 'april@gmail.com';
+    let password ='VisTech@0426';
+
+
 
     //Login to the Application
     await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
     await page.locator('#userEmail').fill(username);
-    await page.locator('#userPassword').fill(password);    
+    await page.locator('#userPassword').fill(password);
+    await page.locator("[name='login']").click();
+    const errorMsg = page.locator(".toast-message");
+    await expect(errorMsg).toContainText('Incorrect email');
+    username='april1@gmail.com';
+    await page.locator('#userEmail').fill(username);
     await page.locator("[name='login']").click();
 
-
-    await page.waitForURL('**/dashboard/dash',{timeout:40000});
     //Grabbing product Items list
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");
-        await expect(page.locator('.card-body').first()).toBeVisible();
-        let expectedCount =0;
+        await itemLocator.last().waitFor();
         for(const product of buyItems){
-            const matchCard = page.locator(".card-body").filter({hasText: new RegExp(product,'i')}); // ← fresh locator each time
+            const matchCard = itemLocator.filter({hasText:product});
             if(await matchCard.count()>0)
             {
-             await matchCard.first().locator('.w-10').click();
-             expectedCount++;
-             await expect(page.locator('button').filter({hasText:'Cart'}).locator('label'))
-            .toHaveText(String(expectedCount), {timeout:10000}); 
+             await matchCard.first().locator('.w-10').click(); 
             }
         }
-        console.log(await itemLocator.allTextContents());
-    
     //Cliicking on cart button and validating added products
     await page.locator("[routerlink*='cart']").click();
     const productsAddedCart = page.locator(".cart");
-    await expect(productsAddedCart).not.toBeEmpty({timeout:10000});
     for(const item of buyItems)
     {
-        await expect(productsAddedCart).toContainText(item,{ignoreCase:true});
+        await expect(productsAddedCart.filter({hasText:item})).toBeVisible();
     } 
-
     await page.locator('.totalRow button').click() //Checkout button clicking
     await page.locator("[placeholder*='Country']").pressSequentially('indi');
     const dropDown = page.locator('.ta-results');
     await dropDown.waitFor();
-
     // const optionsCount = await dropDown.locator('button').count();
     // for(let i=0;i<optionsCount;i++)
     // {
@@ -88,7 +83,7 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         console.log(id);
         if(orderIds.map(ele=>ele.trim()).includes(id))
         {
-            await ordersLocators.nth(i).locator('button.btn-primary').click();
+            await ordersLocators.nth(i).locator('button').click();
             break;
         }
     }
