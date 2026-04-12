@@ -31,11 +31,11 @@ test.only('E2E Test case Scenario',async ({browser})=>{
             const matchCard = itemLocator.filter({hasText:product});
             if(await matchCard.count()>0)
             {
-             await matchCard.first().locator('.w-10').click(); 
-             await page.waitForSelector('.toast-message', {state: 'visible'});
-             await page.waitForSelector('.toast-message', {state: 'hidden'});
+             await matchCard.first().locator('.w-10').click();
             }
         }
+
+    await expect(page.locator(`label:has-text("${buyItems.length}")`)).toBeVisible({timeout:10000});
     //Cliicking on cart button and validating added products
     await page.locator("[routerlink*='cart']").click();
     const productsAddedCart = page.locator(".cart");
