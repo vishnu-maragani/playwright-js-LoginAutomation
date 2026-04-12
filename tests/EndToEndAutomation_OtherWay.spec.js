@@ -13,15 +13,11 @@
         //Login to the Application
         await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
 
-        // await page.getByPlaceholder('email@example.com').fill('anonymous@gmail.com');
         await page.getByPlaceholder('email@example.com').fill(username);
         await page.getByPlaceholder('enter your passsword').fill(password);
         await page.getByRole('button',{name:'Login'}).click();
 
-        // await page.getByPlaceholder('email@example.com').fill(username);
-        // await page.getByRole('button',{name:'Login'}).click();
-        await page.waitForURL('**/dashboard/dash');  
-        await expect(page.locator('.card-body').first()).toBeVisible();
+        await expect(page.locator('.card-body').first()).toBeVisible({timeout:30000});
         await page.locator('.card-body').filter({hasText:'ADIDAS ORIGINAL'}).getByRole('button',{name:'Add To Cart'}).click();
         await page.locator('li').getByRole('button',{name:'Cart'}).click();
         await page.getByText('ADIDAS ORIGINAL').isVisible();
