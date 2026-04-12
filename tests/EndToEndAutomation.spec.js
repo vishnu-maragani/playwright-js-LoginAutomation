@@ -22,14 +22,19 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");
         await expect(page.locator('.card-body').first()).toBeVisible();
+        let expectedCount =0;
         for(const product of buyItems){
             const matchCard = itemLocator.filter({hasText:product});
             if(await matchCard.count()>0)
             {
              await matchCard.first().locator('.w-10').click();
+             expectedCount++;
+             await expect(page.locator('button').filter({hasText:'Cart'}).locator('label'))
+            .toHaveText(String(expectedCount), {timeout:10000}); 
             }
         }
-
+        console.log(await itemLocator.allTextContents());
+    
     //Cliicking on cart button and validating added products
     await page.locator("[routerlink*='cart']").click();
     const productsAddedCart = page.locator(".cart");
@@ -38,10 +43,12 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     {
         await expect(productsAddedCart).toContainText(item,{ignoreCase:true});
     } 
+
     await page.locator('.totalRow button').click() //Checkout button clicking
     await page.locator("[placeholder*='Country']").pressSequentially('indi');
     const dropDown = page.locator('.ta-results');
     await dropDown.waitFor();
+
     // const optionsCount = await dropDown.locator('button').count();
     // for(let i=0;i<optionsCount;i++)
     // {
