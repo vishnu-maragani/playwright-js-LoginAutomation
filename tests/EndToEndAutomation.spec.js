@@ -35,7 +35,7 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
   const productsAddedCart = page.locator(".cart");
   await productsAddedCart.last().waitFor();
   for (const item of buyItems) {
-    await expect(productsAddedCart.filter({ hasText: item })).toBeVisible();
+    await expect(productsAddedCart).toContainText(item, {ignoreCase: true});
   };
 
   //Checkout button clicking
