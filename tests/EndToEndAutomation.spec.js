@@ -24,7 +24,7 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         await expect(page.locator('.card-body').first()).toBeVisible();
         let expectedCount =0;
         for(const product of buyItems){
-            const matchCard = itemLocator.filter({hasText:product});
+            const matchCard = page.locator(".card-body").filter({hasText: new RegExp(product,'i')}); // ← fresh locator each time
             if(await matchCard.count()>0)
             {
              await matchCard.first().locator('.w-10').click();
