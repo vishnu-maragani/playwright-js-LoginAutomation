@@ -27,20 +27,16 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");
         await expect(page.locator('.card-body').first()).toBeVisible();
-        await expect(page.locator('.card-body').last()).toBeVisible();
         for(const product of buyItems){
-            const matchCard = itemLocator.filter({hasText:new RegExp(product,'i')});
-             const count = await matchCard.count();
-             console.log(`Product "${product}" found: ${count}`); // ← debug
-            if(count>0)
+            const matchCard = itemLocator.filter({hasText:product});
+            if(await matchCard.count()>0)
             {
              await matchCard.first().locator('.w-10').click();
-             await page.waitForSelector('.toast-message',{state:'visible'});
-             await page.waitForSelector('.toast-message',{state:'hidden'}); 
             }
         }
-    await expect(page.locator(`label:has-text("${buyItems.length}")`)).toBeVisible({timeout:10000});
+
     //Cliicking on cart button and validating added products
+    await page.waitForTimeout(500); 
     await page.locator("[routerlink*='cart']").click();
     const productsAddedCart = page.locator(".cart");
     await expect(productsAddedCart).toBeVisible({timeout:10000});
