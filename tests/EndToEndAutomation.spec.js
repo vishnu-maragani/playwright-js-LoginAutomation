@@ -36,6 +36,7 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         }
     //Cliicking on cart button and validating added products
     await page.locator("[routerlink*='cart']").click();
+    await page.waitForLoadState('networkidle');
     const productsAddedCart = page.locator(".cart");
     for(const item of buyItems)
     {
