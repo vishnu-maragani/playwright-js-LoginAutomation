@@ -1,5 +1,4 @@
 const { test, expect } = require("@playwright/test");
-const { match } = require("node:assert");
 
 // End to End Test Automation
 test.only("E2E Test case Scenario", async ({ browser }) => {
@@ -28,7 +27,7 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
       await matchCard.first().locator(".w-10").click();
       await page.waitForTimeout(2000);
     }
-  }
+  };
 
 
   //Cliicking on cart button and validating added products
@@ -37,7 +36,7 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
   await productsAddedCart.last().waitFor();
   for (const item of buyItems) {
     await expect(productsAddedCart.filter({ hasText: item })).toBeVisible();
-  }
+  };
 
   //Checkout button clicking
   await page.locator(".totalRow button").click(); 
@@ -51,7 +50,7 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
       await dropDown.locator("button").nth(i).click();
       break;
     }
-  }
+  };
 
   await expect(page.locator(".user__name label")).toHaveText(username);
   await page.locator(".actions a").click(); //Placing order
