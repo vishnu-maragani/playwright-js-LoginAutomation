@@ -37,15 +37,11 @@ test.only('E2E Test case Scenario',async ({browser})=>{
 
     //Cliicking on cart button and validating added products
     await page.locator("[routerlink*='cart']").click();
-    await page.waitForTimeout(3000); // just to let page load
-    // DEBUG - let's see what's actually on the cart page
-    console.log('Cart page HTML:', await page.locator('body').innerHTML());
-    
     const productsAddedCart = page.locator(".cart");
-    await productsAddedCart.first().waitFor({timeout:10000});
+    await expect(productsAddedCart).toBeVisible({timeout:10000});
     for(const item of buyItems)
     {
-        await expect(productsAddedCart.filter({hasText:item.toUpperCase()})).toBeVisible();
+        await expect(productsAddedCart).toContainText(item,{ignoreCase:true});
     } 
     await page.locator('.totalRow button').click() //Checkout button clicking
     await page.locator("[placeholder*='Country']").pressSequentially('indi');
