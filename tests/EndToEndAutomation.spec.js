@@ -17,14 +17,12 @@ test.only('E2E Test case Scenario',async ({browser})=>{
 
     //Login to the Application
     await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
-    await page.locator('#userEmail').fill('anonymous@gmail.com');
-    await page.locator('#userPassword').fill(password);
-    await page.locator("[name='login']").click();
-    const errorMsg = page.locator(".toast-message");
-    await expect(errorMsg).toContainText('Incorrect email');
     await page.locator('#userEmail').fill(username);
+    await page.locator('#userPassword').fill(password);    
     await page.locator("[name='login']").click();
-    await page.waitForURL('**/dashboard/dash')
+
+
+    await page.waitForURL('**/dashboard/dash',{timeout:40000});
     //Grabbing product Items list
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");

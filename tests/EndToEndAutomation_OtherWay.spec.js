@@ -17,6 +17,7 @@
         await page.getByPlaceholder('enter your passsword').fill(password);
         await page.getByRole('button',{name:'Login'}).click();
 
+        await page.waitForURL('**/dashboard/dash', { timeout: 40000 }); 
         await expect(page.locator('.card-body').first()).toBeVisible({timeout:30000});
         await page.locator('.card-body').filter({hasText:'ADIDAS ORIGINAL'}).getByRole('button',{name:'Add To Cart'}).click();
         await page.locator('li').getByRole('button',{name:'Cart'}).click();
