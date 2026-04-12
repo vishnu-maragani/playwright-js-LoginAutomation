@@ -11,8 +11,9 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     const page = await context.newPage();
     
     //Login credentials:-
-    let username= 'april@gmail.com';
-    let password ='VisTech@0426';
+    require('dotenv').config();
+    const username= process.env.EMAIL;
+    const password=process.env.PASSWORD;
 
 
 

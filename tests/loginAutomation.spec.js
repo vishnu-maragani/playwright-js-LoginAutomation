@@ -13,11 +13,15 @@ test("Login Automation",async ({browser,page}) =>{
     const signInError = page.locator('.toast-message');
     const textTitles = page.locator(".card-body b");
 
+    //Login credentials 
+    require('dotenv').config();
+    const user = process.env.EMAIL;
+    const pass = process.env.PASSWORD;
     await username.fill('sabxsax@gmail.com');
-    await password.fill('VisTech@0426');
+    await password.fill(pass);
     await signInButton.click();
     expect(await signInError.textContent()).toContain('Incorrect email');
-    await username.fill('april1@gmail.com');
+    await username.fill(user);
     await signInButton.click();
     // await page.waitForLoadState('networkidle');                              // Wait for load state
     // await expect(textTitles.first()).toBeVisible();

@@ -8,9 +8,15 @@ test("First Playwright Test Login",async ({browser})=>{
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
     const doccumentLink = page.locator("[href*='request']");
     console.log(await page.title());
+
+    //Login Credentials 
+    require('dotenv').config();
+    const user = process.env.ADMINUSER;
+    const pass = process.env.ADMINPASS;
+
     //css selectos  - type,fill
-    await page.locator("[name='username']").fill('rahulshettyacademy');
-    await page.locator("[name='password']").fill('Learning@830$3mK2');
+    await page.locator("[name='username']").fill(user);
+    await page.locator("[name='password']").fill(pass);
     await page.locator("[value='user']").click();
     await page.locator('#okayBtn').click();
     await page.locator("[data-style='btn-info']").selectOption('teach');
@@ -29,14 +35,18 @@ test("Invalid login",async ({browser})=>{
     const item = page.locator(".card-body a");
     console.log(await page.title());
 
+    //Login Credentials 
+    require('dotenv').config();
+    const user = process.env.ADMINUSER;
+    const pass = process.env.ADMINPASS;
 
-    await username.fill('rahulshetty')
-    await page.locator("#password").fill('Learning@830$3mK2');
+    await username.fill('anonymous')
+    await page.locator("#password").fill(pass);
     await signIn.click();
     const errorMsg = page.locator("[style*='block']");
     await expect(errorMsg).toBeVisible();
     await expect(errorMsg).toContainText('Incorrect');
-    await username.fill('rahulshettyacademy');
+    await username.fill(user);
     await signIn.click();
     // console.log(await item.nth(2).textContent());
     // await expect(item.nth(2)).toContainText('Nokia');
@@ -65,9 +75,13 @@ test('Child windows handle ',async ({browser})=>{
     const error = page.locator("[style*='none']");
     const doccumentLink = page.locator("[href*='request']");
 
+    //Login Credentials 
+    require('dotenv').config();
+    const user = process.env.ADMINUSER;
+    const pass = process.env.ADMINPASS;
     //Login
-    await username.fill('rahul');
-    await passowrd.fill('Learning@830$3mK2');
+    await username.fill('anonymous');
+    await passowrd.fill(pass);
     await signInBtn.click();
     const text = await error.textContent();
     expect(text).toContain('Incorrect'); 
