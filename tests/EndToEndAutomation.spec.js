@@ -34,8 +34,10 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
 
   //Product order confirmation
   await expect(page.locator('.hero-primary')).toContainText(' Thankyou for the order. ');
-  const RaworderID = await page.locator('label:has-text("|")').textContent();
-  const orderId = RaworderID.replace(/\|/g, "")
+  const RaworderID = page.locator('label:has-text("|")').last();
+  await expect(RaworderID).toBeVisible();
+  const raw = await RaworderID.textContent();
+  const orderId = raw.replace(/\|/g, "").trim();
   await page.getByText('Orders History Page').click();
   await page.locator('.table').waitFor();
   const allId =await page.locator('tbody tr th').allTextContents();
