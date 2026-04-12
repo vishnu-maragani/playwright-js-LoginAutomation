@@ -27,9 +27,12 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");
         await expect(page.locator('.card-body').first()).toBeVisible();
+        await expect(page.locator('.card-body').last()).toBeVisible();
         for(const product of buyItems){
-            const matchCard = itemLocator.filter({hasText:product});
-            if(await matchCard.count()>0)
+            const matchCard = itemLocator.filter({hasText:new RegExp(product,'i')});
+             const count = await matchCard.count();
+             console.log(`Product "${product}" found: ${count}`); // ← debug
+            if(count>0)
             {
              await matchCard.first().locator('.w-10').click();
              await page.waitForSelector('.toast-message',{state:'visible'});
