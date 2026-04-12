@@ -42,7 +42,7 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     await productsAddedCart.first().waitFor({timeout:10000});
     for(const item of buyItems)
     {
-        await expect(productsAddedCart.filter({hasText:item})).toBeVisible();
+        await expect(productsAddedCart.filter({hasText:item.toUpperCase()})).toBeVisible();
     } 
     await page.locator('.totalRow button').click() //Checkout button clicking
     await page.locator("[placeholder*='Country']").pressSequentially('indi');
