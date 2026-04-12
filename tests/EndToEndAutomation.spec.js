@@ -24,8 +24,9 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
   for (const product of buyItems) {
     const matchCard = itemLocator.filter({ hasText: new RegExp(product, 'i')});
     if ((await matchCard.count()) > 0) {
-      await matchCard.first().locator(".w-10").click();
-      await page.waitForTimeout(10000);
+      console.log(`Clicking add to cart for: ${product}`); // ← debug
+      await matchCard.first().locator(".w-10").click({force:true});
+      await page.waitForTimeout(2000);
     }
   };
 
