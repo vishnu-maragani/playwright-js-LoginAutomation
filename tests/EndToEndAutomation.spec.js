@@ -17,7 +17,7 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
   await page.locator("[name='login']").click();
 
   //Grabbing product Items list
-  const buyItems = ["adidas", "iphone"];
+  const buyItems = ["zara", "iphone"];
   const itemLocator = page.locator(".card-body");
   await itemLocator.last().waitFor();
 
