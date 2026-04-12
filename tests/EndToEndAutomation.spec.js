@@ -28,7 +28,8 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     //Grabbing product Items list
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");
-        await itemLocator.last().waitFor();
+        await page.waitForLoadState('networkidle');
+        await expect(page.locator('.card-body')).first().toBeVisible({timeout:15*1000});
         for(const product of buyItems){
             const matchCard = itemLocator.filter({hasText:product});
             if(await matchCard.count()>0)
@@ -86,7 +87,7 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         console.log(id);
         if(orderIds.map(ele=>ele.trim()).includes(id))
         {
-            await ordersLocators.nth(i).locator('button').click();
+            await ordersLocators.nth(i).locator('button.btn-primary').click();
             break;
         }
     }
