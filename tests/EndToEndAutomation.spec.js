@@ -32,8 +32,8 @@ test.only('E2E Test case Scenario',async ({browser})=>{
             if(await matchCard.count()>0)
             {
              await matchCard.first().locator('.w-10').click(); 
-             await page.waitForSelector('.toast-success', {state: 'visible'});
-             await page.waitForSelector('.toast-success', {state: 'hidden'});
+             await page.waitForSelector('.toast-message', {state: 'visible'});
+             await page.waitForSelector('.toast-message', {state: 'hidden'});
             }
         }
     //Cliicking on cart button and validating added products
