@@ -15,16 +15,13 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     const username= process.env.EMAIL;
     const password=process.env.PASSWORD;
 
-
-
     //Login to the Application
     await page.goto('https://rahulshettyacademy.com/client/#/auth/login');
-    await page.locator('#userEmail').fill(username);
+    await page.locator('#userEmail').fill('anonymous@gmail.com');
     await page.locator('#userPassword').fill(password);
     await page.locator("[name='login']").click();
     const errorMsg = page.locator(".toast-message");
     await expect(errorMsg).toContainText('Incorrect email');
-    username='april1@gmail.com';
     await page.locator('#userEmail').fill(username);
     await page.locator("[name='login']").click();
 
