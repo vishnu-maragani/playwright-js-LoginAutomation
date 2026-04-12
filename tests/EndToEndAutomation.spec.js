@@ -24,12 +24,11 @@ test.only('E2E Test case Scenario',async ({browser})=>{
     await expect(errorMsg).toContainText('Incorrect email');
     await page.locator('#userEmail').fill(username);
     await page.locator("[name='login']").click();
-
+    await page.waitForURL('**/dashboard/dash')
     //Grabbing product Items list
         const buyItems = ['adidas','iphone'];
         const itemLocator =  page.locator(".card-body");
-        await page.waitForLoadState('networkidle');
-        await expect(page.locator('.card-body')).first().toBeVisible({timeout:15*1000});
+        await expect(page.locator('.card-body').first()).toBeVisible();
         for(const product of buyItems){
             const matchCard = itemLocator.filter({hasText:product});
             if(await matchCard.count()>0)
