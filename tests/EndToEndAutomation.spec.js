@@ -1,9 +1,4 @@
-
-
 const {test,expect} = require('@playwright/test');
-const { match } = require('node:assert');
-const { count } = require('node:console');
-const { it } = require('node:test');
 
 // End to End Test Automation
 test.only('E2E Test case Scenario',async ({browser})=>{
@@ -36,10 +31,9 @@ test.only('E2E Test case Scenario',async ({browser})=>{
         }
 
     //Cliicking on cart button and validating added products
-    await page.waitForTimeout(500); 
     await page.locator("[routerlink*='cart']").click();
     const productsAddedCart = page.locator(".cart");
-    await expect(productsAddedCart).toBeVisible({timeout:10000});
+    await expect(productsAddedCart).not.toBeEmpty({timeout:10000});
     for(const item of buyItems)
     {
         await expect(productsAddedCart).toContainText(item,{ignoreCase:true});
