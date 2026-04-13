@@ -34,7 +34,7 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
 
   //Product order confirmation
   await expect(page.locator('.hero-primary')).toContainText(' Thankyou for the order. ');
-  const RaworderID = page.locator('label:has-text("|")'); 
+  const RaworderID = page.locator('label.ng-star-inserted');
   await expect(RaworderID).toBeVisible(); 
 
   const raw = await RaworderID.textContent();
