@@ -13,4 +13,4 @@ test('test for angualr website',async ({page})=>{
     await page.getByRole('link',{name:'Shop'}).click(); 
     await page.locator('app-card').filter({hasText:'Nokia Edge'}).getByRole('button',{name:'Add '}).click();
     await page.getByText('Checkout').click();
-}) 
+});

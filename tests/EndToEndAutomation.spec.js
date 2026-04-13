@@ -23,9 +23,9 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
  
   //Vrryfing added item in cart section
   await expect(page.locator('.cart').filter({hasText:buyItem})).toBeVisible();
-
-  //Checkout  & Place Order
   await page.locator("[style*='none'] button").click();
+
+  //Place Order
   await expect(page.getByPlaceholder('Select Country')).toBeVisible();
   await page.getByRole('textbox',{name:'Select Country'}).pressSequentially('indi');
   await page.locator('.ta-results button').filter({hasText:' India'}).nth(1).click();
@@ -34,8 +34,9 @@ test.only("E2E Test case Scenario", async ({ browser }) => {
 
   //Product order confirmation
   await expect(page.locator('.hero-primary')).toContainText(' Thankyou for the order. ');
-  const RaworderID = page.locator('label:has-text("|")').last();
-  await expect(RaworderID).toBeVisible();
+  const RaworderID = page.locator('label:has-text("|")'); 
+  await expect(RaworderID).toBeVisible(); 
+
   const raw = await RaworderID.textContent();
   const orderId = raw.replace(/\|/g, "").trim();
   await page.getByText('Orders History Page').click();
