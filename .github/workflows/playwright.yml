@@ -24,6 +24,9 @@ jobs:
           PASSWORD: ${{secrets.PASSWORD}}
           ADMINUSER: ${{secrets.ADMINUSER}}
           ADMINPASS: ${{secrets.ADMINPASS}}
+          ADMINNAME: ${{secrets.ADMINNAME}}
+          ADMINEMAIL: ${{secrets.ADMINEMAIL}}
+          ADMINPH: ${{secrets.ADMINPH}}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
