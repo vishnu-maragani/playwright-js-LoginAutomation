@@ -16,7 +16,7 @@ class LoginPage{
         await this.password.fill(password);
         await this.loginBtn.click();
     }
-}
+};
 
 
 class LoginPageUserDetails{
@@ -56,7 +56,7 @@ class LoginPageUserDetails{
 class LoginPage2{
     constructor(page){
         this.page = page;
-        this.loginBtn = page.locator('.go-to-login-btn');  //
+        this.loginBtn = page.locator('.go-to-login-btn');
         this.username = page.locator('#inputUsername');
         this.password = page.locator("[name='inputPassword']");
         this.chekBox1 = page.locator("[for='chkboxOne']");
@@ -66,7 +66,9 @@ class LoginPage2{
     }
 
     async goTo(){
-        await this.page.goto('https://rahulshettyacademy.com/locatorspractice/');
+        await this.page.goto('https://rahulshettyacademy.com/locatorspractice/',{
+            waitUntil: "domcontentloaded"
+        });
     }
     async goToLoginPage(){
         await this.loginBtn.click();
@@ -86,5 +88,5 @@ class LoginPage2{
     wrongLogin(){
         return this.errorLocator;
     }
-}
+};
 module.exports = {LoginPage,LoginPageUserDetails,LoginPage2};

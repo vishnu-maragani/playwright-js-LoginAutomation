@@ -1,7 +1,9 @@
 const {test,expect} = require('@playwright/test');
 
 test('E2E scenario for login test',async({page})=>{
-    await page.goto('https://rahulshettyacademy.com/locatorspractice/');
+    await page.goto('https://rahulshettyacademy.com/locatorspractice/',{
+        waitUntil:"domcontentloaded"
+    });
 
     require('dotenv').config();
     const username= process.env.ADMINNAME;

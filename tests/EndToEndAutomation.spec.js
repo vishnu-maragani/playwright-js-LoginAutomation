@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
 // End to End Test Automation
-test.only("E2E Test case Scenario", async ({ browser }) => {
+test("E2E Test case Scenario", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
 
