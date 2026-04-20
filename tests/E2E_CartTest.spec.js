@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { test, expect } = require("@playwright/test");
 const {LoginPage,HomePage_AddToCart,MyCart,PlaceOrder,ProductOrderConfirmation}  = require('../pages');
 
@@ -11,8 +12,8 @@ test("E2E Test case Scenario", async ({ page }) => {
   const orderCnf = new ProductOrderConfirmation(page);
   const item = 'zara'; 
   const state = 'indi';
+
   //Login
-  require('dotenv').config();
   const username = process.env.EMAIL;
   const password = process.env.PASSWORD;
   await loginpage.goTo();

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const {test,expect} = require('@playwright/test');
 const {LoginPageUserDetails,LoginPage2, HomePage_Validation} = require('../pages');
 test('E2E scenario for login test',async({page})=>{
@@ -7,7 +8,6 @@ test('E2E scenario for login test',async({page})=>{
     const login = new LoginPage2(page);
     const homepage = new HomePage_Validation(page);
     //env set-up
-    require('dotenv').config();
     const username= process.env.ADMINNAME;
     const useremail=process.env.ADMINEMAIL;
     const userph=process.env.ADMINPH;

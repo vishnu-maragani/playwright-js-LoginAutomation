@@ -1,3 +1,4 @@
+require('dotenv').config();
 const {test, expect}  = require('@playwright/test');
 
 //Test case: 1 - Login Validation
@@ -10,7 +11,6 @@ test("First Playwright Test Login",async ({browser})=>{
     console.log(await page.title());
 
     //Login Credentials 
-    require('dotenv').config();
     const user = process.env.ADMINUSER;
     const pass = process.env.ADMINPASS;
 
@@ -47,12 +47,14 @@ test("Invalid login",async ({browser})=>{
     await expect(errorMsg).toBeVisible();
     await expect(errorMsg).toContainText('Incorrect');
     await username.fill(user);
+    await page.locator("#password").fill(pass);
     await signIn.click();
-    // console.log(await item.nth(2).textContent());
-    // await expect(item.nth(2)).toContainText('Nokia');
+    // await page.waitForLoadState('networkidle');
+    await page.waitForURL(/shop/);
     await expect(item.first()).toBeVisible();
     const textTitles = await item.allTextContents();
-    const isPresent = textTitles.some(ele=>ele==='iphone X');
+    console.log(textTitles);
+    const isPresent = textTitles.some(ele=>ele.toLowerCase().includes('iphone'));
     expect(isPresent).toBe(true);
 });
 

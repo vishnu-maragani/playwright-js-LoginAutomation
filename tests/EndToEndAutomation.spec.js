@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { test, expect } = require("@playwright/test");
 
 // End to End Test Automation
@@ -6,7 +7,6 @@ test("E2E Test case Scenario", async ({ browser }) => {
   const page = await context.newPage();
 
   //Login Credentials
-  require("dotenv").config();
   const username = process.env.EMAIL;
   const password = process.env.PASSWORD;
 

@@ -1,3 +1,4 @@
+    require('dotenv').config();
     const {test,expect} = require('@playwright/test');
 
     // End to End Test Automation
@@ -6,7 +7,6 @@
         const page = await context.newPage();
         
         //Login credentials:-
-        require('dotenv').config();
         let username = process.env.EMAIL;
         let password = process.env.PASSWORD;
 
@@ -21,7 +21,8 @@
         await expect(page.locator('.card-body').first()).toBeVisible({timeout:30000});
         await page.locator('.card-body').filter({hasText:'ADIDAS ORIGINAL'}).getByRole('button',{name:'Add To Cart'}).click();
         await page.locator('li').getByRole('button',{name:'Cart'}).click();
-        await page.getByText('ADIDAS ORIGINAL').isVisible();
+        await expect(page.getByText('ADIDAS ORIGINAL')).toBeVisible();
+        await expect(page.locator('li').getByRole('button',{name:'Checkout'})).toBeVisible();
         await page.locator('li').getByRole('button',{name:'Checkout'}).click();
         await page.getByPlaceholder('Select Country').pressSequentially('indi');
         await page.getByRole('button',{name:'India'}).nth(1).click();

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const {test, expect} = require('@playwright/test');
 
 
@@ -14,7 +15,6 @@ test("Login Automation",async ({browser,page}) =>{
     const textTitles = page.locator(".card-body b");
 
     //Login credentials 
-    require('dotenv').config();
     const user = process.env.EMAIL;
     const pass = process.env.PASSWORD;
     await username.fill('sabxsax@gmail.com');
