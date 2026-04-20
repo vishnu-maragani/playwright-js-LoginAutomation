@@ -14,7 +14,7 @@ const config = {
     reporter:'html',
     use:{
         browserName: 'webkit',
-        headless: false,
+        headless: true,
         trace:'on'
     }
 
