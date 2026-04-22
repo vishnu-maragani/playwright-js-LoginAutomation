@@ -19,6 +19,7 @@ test("First Playwright Test Login",async ({browser})=>{
     await page.locator("[name='password']").fill(pass);
     await page.locator("[value='user']").click();
     await page.locator('#okayBtn').click();
+    await expect(page.locator('#myModal')).toBeHidden();
     await page.locator("[data-style='btn-info']").selectOption('teach');
     await page.locator('#terms').click();
     await page.locator("[value='Sign In']").click();
