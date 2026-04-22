@@ -20,7 +20,7 @@ test("E2E Test case Scenario", async ({ browser }) => {
   const buyItem = 'zara';
   await expect(page.locator('#products')).toBeVisible();
   await page.locator('.card-body').filter({hasText:buyItem}).getByRole('button',{name:'Add To Cart'}).click();
-  await page.hasText(' Product Added To Cart ').waitFor();
+  await expect(page.getByText('Product Added To Cart')).toBeVisible();
   await page.locator("[routerlink*='cart']").click();
  
   //Vrryfing added item in cart section
