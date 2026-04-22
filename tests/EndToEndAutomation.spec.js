@@ -21,10 +21,13 @@ test("E2E Test case Scenario", async ({ browser }) => {
   await expect(page.locator('#products')).toBeVisible();
   await page.locator('.card-body').filter({hasText:buyItem}).getByRole('button',{name:'Add To Cart'}).click();
   await expect(page.locator('#toast-container')).toContainText('Product Added To Cart');
-  await page.locator("[routerlink*='cart']").click();
+  await page.locator("[routerlink*='cart']").click();  //
+  await page.waitForURL('**/cart');
  
   //Vrryfing added item in cart section
-  await expect(page.locator('.cartSection h3')).toContainText(new RegExp(buyItem, 'i'));
+  const cartItems = page.locator('.cartSection h3');
+  await expect(cartItems.first()).toBeVisible({timeout:10000});
+  await expect(cartItems).toContainText(new RegExp(buyItem, 'i'));
   await page.locator("[style*='none'] button").click();
 
   //Place Order
