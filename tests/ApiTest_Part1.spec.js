@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { test, expect} = require("@playwright/test");
-const {ApiUtils}  = require('./utils/Api_tests_general');
+const {ApiUtils}  = require('../utils/Api_tests_general');
 
 // Global test run for Token and OrderId 
 let response;
