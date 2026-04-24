@@ -17,7 +17,7 @@ test("E2E Test case Scenario", async ({ browser }) => {
   await page.locator("[name='login']").click();
 
   //Adding Items list
-  const buyItem = 'iphone';
+  const buyItem = 'adidas';
   await expect(page.locator('#products')).toBeVisible();
   await page.locator('.card-body').filter({hasText:buyItem}).getByRole('button',{name:'Add To Cart'}).click();
   await expect(page.locator('#toast-container')).toContainText('Product Added To Cart');
@@ -27,7 +27,7 @@ test("E2E Test case Scenario", async ({ browser }) => {
   //Vrryfing added item in cart section
   const cartItems = page.locator('.cartSection h3');
   await expect(cartItems.first()).toBeVisible({timeout:30*1000});
-  await expect(cartItems).toContainText(new RegExp(buyItem, 'i'));
+  await expect(cartItems.first()).toContainText(new RegExp(buyItem, 'i'));
   await page.locator("[style*='none'] button").click();
 
   //Place Order

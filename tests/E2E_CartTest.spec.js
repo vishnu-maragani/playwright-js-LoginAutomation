@@ -10,7 +10,7 @@ test("E2E Test case Scenario", async ({ page }) => {
   const cartPage = new MyCart(page);
   const placeorder = new PlaceOrder(page);
   const orderCnf = new ProductOrderConfirmation(page);
-  const item = 'zara'; 
+  const item = 'adidas'; 
   const state = 'indi';
 
   //Login
