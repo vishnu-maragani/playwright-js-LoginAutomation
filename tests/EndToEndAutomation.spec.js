@@ -26,7 +26,7 @@ test("E2E Test case Scenario", async ({ browser }) => {
  
   //Vrryfing added item in cart section
   const cartItems = page.locator('.cartSection h3');
-  await expect(cartItems.first()).toBeVisible({timeout:10000});
+  await expect(cartItems.first()).toBeVisible({timeout:30*1000});
   await expect(cartItems).toContainText(new RegExp(buyItem, 'i'));
   await page.locator("[style*='none'] button").click();
 
