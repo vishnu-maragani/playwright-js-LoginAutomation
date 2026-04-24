@@ -7,7 +7,7 @@ import { trace } from 'node:console';
 
 const config = {
     testDir : './tests',
-    timeout: 40*1000,
+    timeout: 30*1000,
     expect:{
         timeout: 5000
     },
@@ -15,7 +15,7 @@ const config = {
     use:{
         browserName: 'chromium',
         headless: true,
-        trace:'on'
+        trace:'retain-on-failure'
     }
 
 };
