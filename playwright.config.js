@@ -13,7 +13,7 @@ const config = {
     },
     reporter:'html',
     use:{
-        browserName: 'firefox',
+        browserName: 'chromium',
         headless: true,
         trace:'retain-on-failure'
     }

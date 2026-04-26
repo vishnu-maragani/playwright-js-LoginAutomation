@@ -18,6 +18,7 @@ test("E2E Test case Scenario", async ({ browser }) => {
 
   //Adding Items list
   const buyItem = 'adidas';
+  await page.waitForLoadState('networkidle');
   await expect(page.locator('#products')).toBeVisible();
   await page.locator('.card-body').filter({hasText:buyItem}).getByRole('button',{name:'Add To Cart'}).click();
   await expect(page.locator('#toast-container')).toContainText('Product Added To Cart');
